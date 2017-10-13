@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-export default (window = window, document = document, override = false) =>  {
-
+function polyfillWindowRegisterElement (window, document, override) {
+    override = override || false;
     (function(window, document, Object, REGISTER_ELEMENT){'use strict';
 
     // in case it's there or already patched
@@ -695,6 +695,6 @@ document[REGISTER_ELEMENT] = function registerElement(type, options) {
   return constructor;
 };
 
-}(window, document, Object, 'registerElement'));
+    }(window, document, Object, 'registerElement'));
 
 }

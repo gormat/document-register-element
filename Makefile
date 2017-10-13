@@ -28,6 +28,7 @@ ESMODULE = src/$(REPO).js
 build:
 	make clean
 	make var
+	make varfunction
 	make innerHTML
 #	make ie8
 	make dreie8
@@ -45,6 +46,16 @@ var:
 	node node_modules/uglify-js/bin/uglifyjs --verbose build/no-copy.$(REPO).max.js >build/no-copy.$(REPO).js
 	cat template/license.before LICENSE.txt template/license.after build/no-copy.$(REPO).max.js >build/$(REPO).max.js
 	cat template/copyright build/no-copy.$(REPO).js >build/$(REPO).js
+	rm build/no-copy.$(REPO).max.js
+	rm build/no-copy.$(REPO).js
+
+# build generic version with function
+varfunction:
+	mkdir -p build
+	cat template/var.function.before $(VAR) template/var.function.after >build/no-copy.$(REPO).max.js
+	node node_modules/uglify-js/bin/uglifyjs --verbose build/no-copy.$(REPO).max.js >build/no-copy.$(REPO).js
+	cat template/license.before LICENSE.txt template/license.after build/no-copy.$(REPO).max.js >build/$(REPO).function.max.js
+	cat template/copyright build/no-copy.$(REPO).js >build/$(REPO).function.js
 	rm build/no-copy.$(REPO).max.js
 	rm build/no-copy.$(REPO).js
 
